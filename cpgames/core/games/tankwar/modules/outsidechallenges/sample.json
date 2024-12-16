@@ -1,0 +1,14 @@
+{
+    "timer": 90,
+    "player_1": {
+        "point": 0,
+        "life": 5,
+        "level": 0
+    },
+    "player_2": {
+        "point": 0,
+        "life": 5,
+        "level": 0
+    },
+    "remain_enemy": 12
+}

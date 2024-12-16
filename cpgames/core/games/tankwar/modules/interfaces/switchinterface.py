@@ -11,7 +11,7 @@ from .....utils import QuitGame
 
 
 '''关卡切换界面'''
-def SwitchLevelIterface(screen, cfg, resource_loader, level_next=1):
+def SwitchLevelIterface(screen, cfg, resource_loader, map_level=1):
     background_img = resource_loader.images['others']['background']
     color_white = (255, 255, 255)
     color_gray = (192, 192, 192)
@@ -21,7 +21,7 @@ def SwitchLevelIterface(screen, cfg, resource_loader, level_next=1):
     logo_rect = logo_img.get_rect()
     logo_rect.centerx, logo_rect.centery = cfg.SCREENSIZE[0] / 2, cfg.SCREENSIZE[1] // 4
     # 游戏加载提示
-    font_render = font.render('Loading game data, You will enter Level-%s' % level_next, True, color_white)
+    font_render = font.render('Loading game data, You will enter map-%s ...' % map_level, True, color_white)
     font_rect = font_render.get_rect()
     font_rect.centerx, font_rect.centery = cfg.SCREENSIZE[0] / 2, cfg.SCREENSIZE[1] / 2
     # 游戏加载进度条

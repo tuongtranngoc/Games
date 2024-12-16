@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Status</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .button { padding: 10px 20px; font-size: 16px; margin: 20px; cursor: pointer; }
+        .status { font-size: 20px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Tank Improvement</h1>
+    <button class="button" onclick="updateStatus('player_1')">Player 1</button>
+    <button class="button" onclick="updateStatus('player_2')">Player 2</button>
+    
+    </div>
+
+    <script>
+        // Fetch and display initial game status
+        function fetchStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerText = 
+                        'Player 1: ' + (data.player_1 ? 'True' : 'False') + 
+                        '\nPlayer 2: ' + (data.player_2 ? 'True' : 'False');
+                });
+        }
+
+        // Update player status (called when button is clicked)
+        function updateStatus(player) {
+            fetch('/' + player, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    fetchStatus(); // Refresh the game status after the update
+                });
+        }
+
+        // Initial call to fetch and display game status
+        fetchStatus();
+    </script>
+</body>
+</html>

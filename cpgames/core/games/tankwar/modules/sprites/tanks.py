@@ -41,10 +41,12 @@ class PlayerTank(pygame.sprite.Sprite):
         self.booming_flag = False
         self.boom_count = 0
         # 坦克生命数量
-        self.num_lifes = 3
+        self.num_lifes = 5
+        # Points
+        self.points = 0
         # 重置
         self.reset()
-    '''移动'''
+
     def move(self, direction, scene_elems, player_tanks_group, enemy_tanks_group, home):
         # 爆炸时无法移动
         if self.booming_flag:
@@ -69,7 +71,7 @@ class PlayerTank(pygame.sprite.Sprite):
             speed = (self.speed, 0)
         rect_ori = self.rect
         self.rect = self.rect.move(speed)
-        # --碰到场景元素
+
         for key, value in scene_elems.items():
             if key in ['brick_group', 'iron_group', 'river_group']:
                 if pygame.sprite.spritecollide(self, value, False, None):
@@ -161,6 +163,7 @@ class PlayerTank(pygame.sprite.Sprite):
                 position = (self.rect.right+1, self.rect.centery)
             return Bullet(bullet_images=self.bullet_images, screensize=self.screensize, direction=self.direction, position=position, border_len=self.border_len, is_stronger=is_stronger, speed=speed)
         return False
+    
     '''提高坦克等级'''
     def improveTankLevel(self):
         if self.booming_flag:
@@ -186,6 +189,11 @@ class PlayerTank(pygame.sprite.Sprite):
     '''增加生命值'''
     def addLife(self):
         self.num_lifes += 1
+        
+    '''Update points'''
+    def addPoint(self, point):
+        self.points += point
+    
     '''设置为无敌状态'''
     def setProtected(self):
         self.is_protected = True

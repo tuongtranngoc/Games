@@ -11,7 +11,7 @@ from .....utils import QuitGame
 
 
 '''游戏结束界面'''
-def GameEndIterface(screen, cfg, resource_loader, is_win=True):
+def GameEndIterface(screen, cfg, resource_loader, winner=None):
     background_img = resource_loader.images['others']['background']
     color_white = (255, 255, 255)
     color_red = (255, 0, 0)
@@ -25,10 +25,11 @@ def GameEndIterface(screen, cfg, resource_loader, is_win=True):
     gameover_flash_count = 0
     gameover_show_flag = True
     # 游戏胜利与否的提示
-    if is_win:
-        font_render = font.render('Congratulations, You win!', True, color_white)
+    if winner:
+        font_render = font.render(f'Congratulations, {winner} is winner!', True, color_white)
     else:
-        font_render = font.render('Sorry, You fail!', True, color_white)
+        font_render = font.render(f'A tie game, Please play again!', True, color_white)
+        
     font_rect = font_render.get_rect()
     font_rect.centerx, font_rect.centery = cfg.SCREENSIZE[0] / 2, cfg.SCREENSIZE[1] / 3
     # 用于选择退出或重新开始

@@ -8,6 +8,7 @@ Author:
 '''
 import os
 import pygame
+import numpy as np
 from ..base import PygameBaseGame
 from .modules import SwitchLevelIterface, GameEndIterface, GameStartInterface, GameLevel
 
@@ -21,7 +22,7 @@ class Config():
     # 屏幕大小
     SCREENSIZE = (630, 630)
     # 标题
-    TITLE = '坦克大战 —— Charles的皮卡丘'
+    TITLE = 'TANKWAR GAME - KAPLAPA'
     # 屏幕超参数
     BORDER_LEN = 3
     GRID_SIZE = 24
@@ -133,10 +134,10 @@ class TankWarGame(PygameBaseGame):
             # 关卡数
             levelfilepaths = [os.path.join(cfg.LEVELFILEDIR, filename) for filename in sorted(os.listdir(cfg.LEVELFILEDIR))]
             # 主循环
-            for idx, levelfilepath in enumerate(levelfilepaths):
-                SwitchLevelIterface(screen, cfg, resource_loader, idx + 1)
-                game_level = GameLevel(idx+1, levelfilepath, is_dual_mode, cfg, resource_loader)
-                is_win = game_level.start(screen)
-                if not is_win: break
+            game_map = np.random.choice(levelfilepaths)
+            idx = levelfilepaths.index(game_map)
+            SwitchLevelIterface(screen, cfg, resource_loader, idx + 1)
+            game_level = GameLevel(idx+1, game_map, is_dual_mode, cfg, resource_loader)
+            is_win = game_level.start(screen)
             # 结束界面
             is_quit_game = GameEndIterface(screen, cfg, resource_loader, is_win)
