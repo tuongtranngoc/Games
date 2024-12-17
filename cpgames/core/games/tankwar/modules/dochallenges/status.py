@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from pymongo import MongoClient
 
 
-from .....games.tankwar.modules.dochallenges import config
+import config
 
 app = Flask(__name__)
 
