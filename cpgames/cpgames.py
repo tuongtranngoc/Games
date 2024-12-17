@@ -83,4 +83,4 @@ if __name__ == '__main__':
     import random
     games_client = CPGames()
     all_supports = games_client.getallsupported()
-    games_client.execute(random.choice(list(all_supports.values())))
+    games_client.execute('tankwar')

@@ -10,7 +10,7 @@ import pygame
 import random
 from .sprites import *
 from ....utils import QuitGame
-from ....games.tankwar.modules.outsidechallenges.db_status import DBStatus
+# from ....games.tankwar.modules.outsidechallenges.db_status import DBStatus
 
 
 class GameLevel():
@@ -44,7 +44,7 @@ class GameLevel():
         # 解析关卡文件
         self.__parseLevelFile()
 
-        self.status = DBStatus()
+        # self.status = DBStatus()
         
     '''Game Start'''
     def start(self, screen):
@@ -120,6 +120,7 @@ class GameLevel():
             # Player actions
             key_pressed = pygame.key.get_pressed()
             # Player 1 uses WSAD to move, press Space to shoot
+            import ipdb; ipdb.set_trace();
             if tank_player1.num_lifes >= 0:
                 if key_pressed[pygame.K_w]:
                     player1_tanks_group.remove(tank_player1)
@@ -233,7 +234,7 @@ class GameLevel():
                 pygame.sprite.groupcollide(player2_tanks_group, self.scene_elems.get('tree_group'), False, False):
                 self.sounds['hit'].play()
             
-            def __playerEeatFood(player_tank, enemy_tank_group, other_ptank_group):
+            def __playerEeatFood(player_tank: PlayerTank, enemy_tank_group, other_ptank_group):
                 for food in foods_group:
                     if pygame.sprite.collide_rect(player_tank, food):
                         if food.name == 'boom':
@@ -243,12 +244,14 @@ class GameLevel():
                             self.total_enemy_num -= len(enemy_tank_group)
                             player_tank.addPoint(len(enemy_tank_group))
                             enemy_tank_group = pygame.sprite.Group()
+                            for p_tank in other_ptank_group:
+                                p_tank.decreaseTankLevel()
                         elif food.name == 'clock':
                             self.sounds['add'].play()
+                            for p_tank in other_ptank_group:
+                                p_tank.setStill()
                             for enemy_tank in enemy_tank_group:
                                 enemy_tank.setStill()
-                            for ptank in other_ptank_group:
-                                ptank.setStill()
                         elif food.name == 'gun':
                             self.sounds['add'].play()
                             player_tank.improveTankLevel()
@@ -262,7 +265,7 @@ class GameLevel():
                             self.sounds['add'].play()
                             player_tank.addLife()
                         foods_group.remove(food)
-                return enemy_tank_group, other_ptank_group
+                return enemy_tank_group
                         
             def __doChallenge(p_tank, player_level):
                 tank_levels = self.status.query_status()
@@ -272,12 +275,12 @@ class GameLevel():
 
             # --我方坦克吃到食物
             for player_tank in player1_tanks_group:
-                enemy_tanks_group, player2_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player2_tanks_group)
-                __doChallenge(player_tank, 'player1_level')
+                enemy_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player2_tanks_group)
+                # __doChallenge(player_tank, 'player1_level')
                         
             for player_tank in player2_tanks_group:
-                enemy_tanks_group, player1_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player1_tanks_group)
-                __doChallenge(player_tank, 'player2_level')
+                enemy_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player1_tanks_group)
+                # __doChallenge(player_tank, 'player2_level')
                 
             # 画场景地图
             for key, value in self.scene_elems.items():

@@ -44,12 +44,15 @@ class PlayerTank(pygame.sprite.Sprite):
         self.num_lifes = 5
         # Points
         self.points = 0
+        self.is_keep_still = False
+        self.keep_still_time = 250
+        self.keep_still_count = 0
         # 重置
         self.reset()
 
     def move(self, direction, scene_elems, player_tanks_group, enemy_tanks_group, home):
         # 爆炸时无法移动
-        if self.booming_flag:
+        if self.is_keep_still or self.booming_flag:
             return
         # 方向不一致先改变方向
         if self.direction != direction:
@@ -103,20 +106,29 @@ class PlayerTank(pygame.sprite.Sprite):
             self.switch_count = 0
             self.switch_pointer = not self.switch_pointer
             self.image = self.tank_direction_image.subsurface((48*int(self.switch_pointer), 0), (48, 48))
-    '''更新'''
+    
     def update(self):
+        if self.is_keep_still:
+            self.keep_still_count += 1
+            print("player: ", self.keep_still_count)
+            if self.keep_still_count > self.keep_still_time:
+                self.is_keep_still = False
+                self.keep_still_count = 0
+        
         # 坦克子弹冷却更新
         if self.is_bullet_cooling:
             self.bullet_cooling_count += 1
             if self.bullet_cooling_count >= self.bullet_cooling_time:
                 self.bullet_cooling_count = 0
                 self.is_bullet_cooling = False
+                
         # 无敌状态更新
         if self.is_protected:
             self.protected_count += 1
             if self.protected_count > self.protected_time:
                 self.is_protected = False
                 self.protected_count = 0
+                
         # 爆炸状态更新
         if self.booming_flag:
             self.image = self.boom_image
@@ -125,7 +137,10 @@ class PlayerTank(pygame.sprite.Sprite):
                 self.boom_count = 0
                 self.booming_flag = False
                 self.reset()
-    '''设置坦克方向'''
+    
+    def setStill(self):
+        self.is_keep_still = True
+        
     def setDirection(self, direction):
         self.direction = direction
         if self.direction == 'up':
@@ -136,12 +151,11 @@ class PlayerTank(pygame.sprite.Sprite):
             self.tank_direction_image = self.tank_image.subsurface((0, 96), (96, 48))
         elif self.direction == 'right':
             self.tank_direction_image = self.tank_image.subsurface((0, 144), (96, 48))
-    '''射击'''
+    
     def shoot(self):
-        # 爆炸时无法射击
-        if self.booming_flag:
+        if self.is_keep_still or self.booming_flag:
             return False
-        # 子弹不在冷却状态时
+ 
         if not self.is_bullet_cooling:
             self.is_bullet_cooling = True
             if self.tanklevel == 0:
@@ -164,7 +178,6 @@ class PlayerTank(pygame.sprite.Sprite):
             return Bullet(bullet_images=self.bullet_images, screensize=self.screensize, direction=self.direction, position=position, border_len=self.border_len, is_stronger=is_stronger, speed=speed)
         return False
     
-    '''提高坦克等级'''
     def improveTankLevel(self):
         if self.booming_flag:
             return False
@@ -173,7 +186,7 @@ class PlayerTank(pygame.sprite.Sprite):
         self.setDirection(self.direction)
         self.image = self.tank_direction_image.subsurface((48*int(self.switch_pointer), 0), (48, 48))
         return True
-    '''降低坦克等级'''
+    
     def decreaseTankLevel(self):
         if self.booming_flag:
             return False
@@ -186,18 +199,16 @@ class PlayerTank(pygame.sprite.Sprite):
             self.setDirection(self.direction)
             self.image = self.tank_direction_image.subsurface((48*int(self.switch_pointer), 0), (48, 48))
         return True if self.tanklevel < 0 else False
-    '''增加生命值'''
+    
     def addLife(self):
         self.num_lifes += 1
-        
-    '''Update points'''
+
     def addPoint(self, point):
         self.points += point
     
-    '''设置为无敌状态'''
     def setProtected(self):
         self.is_protected = True
-    '''画我方坦克'''
+    
     def draw(self, screen):
         screen.blit(self.image, self.rect)
         if self.is_protected:
@@ -206,7 +217,7 @@ class PlayerTank(pygame.sprite.Sprite):
                 self.protected_mask_pointer = not self.protected_mask_pointer
                 self.protected_mask_flash_count = 0
             screen.blit(self.protected_mask.subsurface((48*self.protected_mask_pointer, 0), (48, 48)), self.rect)
-    '''重置坦克, 重生的时候用'''
+
     def reset(self):
         # 坦克方向
         self.direction = self.init_direction
@@ -237,7 +248,6 @@ class PlayerTank(pygame.sprite.Sprite):
         self.rect.left, self.rect.top = self.init_position
 
 
-'''敌方坦克类'''
 class EnemyTank(pygame.sprite.Sprite):
     def __init__(self, enemy_tank_images, appear_image, position, border_len, screensize, bullet_images=None, food_images=None, boom_image=None, **kwargs):
         pygame.sprite.Sprite.__init__(self)
@@ -289,7 +299,7 @@ class EnemyTank(pygame.sprite.Sprite):
         self.keep_still_count = 0
         # 坦克移动速度
         self.speed = 10 - int(self.tanktype) * 2
-    '''射击'''
+   
     def shoot(self):
         if not self.is_bullet_cooling:
             self.is_bullet_cooling = True
@@ -312,7 +322,7 @@ class EnemyTank(pygame.sprite.Sprite):
                 position = (self.rect.right+1, self.rect.centery)
             return Bullet(bullet_images=self.bullet_images, screensize=self.screensize, direction=self.direction, position=position, border_len=self.border_len, is_stronger=is_stronger, speed=speed)
         return False
-    '''实时更新坦克'''
+    
     def update(self, scene_elems, player_tanks_group, enemy_tanks_group, home):
         data_return = dict()
         # 死后爆炸
@@ -328,6 +338,7 @@ class EnemyTank(pygame.sprite.Sprite):
         # 禁止行动时不更新
         if self.is_keep_still:
             self.keep_still_count += 1
+            print("enemy: ", self.keep_still_count)
             if self.keep_still_count > self.keep_still_time:
                 self.is_keep_still = False
                 self.keep_still_count = 0
@@ -357,20 +368,16 @@ class EnemyTank(pygame.sprite.Sprite):
                 self.image = self.appear_images[0]
         # 出生后实时更新
         else:
-            # --坦克移动
             self.move(scene_elems, player_tanks_group, enemy_tanks_group, home)
-            # --坦克子弹冷却更新
             if self.is_bullet_cooling:
                 self.bullet_cooling_count += 1
                 if self.bullet_cooling_count >= self.bullet_cooling_time:
                     self.bullet_cooling_count = 0
                     self.is_bullet_cooling = False
-            # --能射击就射击
             data_return['bullet'] = self.shoot()
         return data_return
-    '''随机移动坦克'''
+    
     def move(self, scene_elems, player_tanks_group, enemy_tanks_group, home):
-        # 移动(使用缓冲)
         self.move_cache_count += 1
         if self.move_cache_count < self.move_cache_time:
             return
