@@ -84,7 +84,7 @@ class TankWarState:
                             'tank_direction_image',
                             'image',
                             'boom_image']:
-                        state['enemy_tank_group_state'][i].pop(k)
+                    state['enemy_tank_group_state'][i].pop(k)
                 state['enemy_tank_group_state'][i]['rect'] = list(state['enemy_tank_group_state'][i]['rect'])
 
         for tank in ['player1_bullets_group_state', 'player2_bullets_group_state']:
@@ -116,10 +116,10 @@ class TankWarState:
         
         if 'foods_group_state' in state:
             for i, __ in enumerate(state['foods_group_state']):
-                    _id = reformat(state['foods_group_state'][i])
-                    state['foods_group_state'][i]['_id'] = _id
-                    state['foods_group_state'][i].pop('image')
-                    state['foods_group_state'][i]['rect'] = list(state['foods_group_state'][i]['rect'])
+                _id = reformat(state['foods_group_state'][i])
+                state['foods_group_state'][i]['_id'] = _id
+                state['foods_group_state'][i].pop('image')
+                state['foods_group_state'][i]['rect'] = list(state['foods_group_state'][i]['rect'])
         return state
 
     def decide(self, game_state):
