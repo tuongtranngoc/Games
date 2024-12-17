@@ -10,7 +10,7 @@ import pygame
 import random
 from .sprites import *
 from ....utils import QuitGame
-# from ....games.tankwar.modules.outsidechallenges.db_status import DBStatus
+from ....games.tankwar.modules.outsidechallenges.db_status import DBStatus
 
 
 class GameLevel():
@@ -32,7 +32,7 @@ class GameLevel():
         # 字体
         self.font = resource_loader.fonts['gaming']
         # Quit Game Timer
-        self.countdown_time = 100
+        self.countdown_time = 120
         # 关卡场景元素
         self.scene_elems = {
             'brick_group': pygame.sprite.Group(),
@@ -44,7 +44,7 @@ class GameLevel():
         # 解析关卡文件
         self.__parseLevelFile()
 
-        # self.status = DBStatus()
+        self.status = DBStatus()
         
     '''Game Start'''
     def start(self, screen):
@@ -113,15 +113,13 @@ class GameLevel():
                             )
                             if (not pygame.sprite.spritecollide(enemy_tank, enemy_tanks_group, False, None)) and (not pygame.sprite.spritecollide(enemy_tank, player1_tanks_group, False, None) or not pygame.sprite.spritecollide(enemy_tank, player2_tanks_group, False, None)):
                                 enemy_tanks_group.add(enemy_tank)
-            
             seconds_passed = (pygame.time.get_ticks() - start_ticks) // 1000
             self.time_left = max(0, self.countdown_time - seconds_passed)
             
             # Player actions
             key_pressed = pygame.key.get_pressed()
             # Player 1 uses WSAD to move, press Space to shoot
-            import ipdb; ipdb.set_trace();
-            if tank_player1.num_lifes >= 0:
+            if self.time_left >= 0:
                 if key_pressed[pygame.K_w]:
                     player1_tanks_group.remove(tank_player1)
                     tank_player1.move('up', self.scene_elems, player1_tanks_group, enemy_tanks_group, home)
@@ -145,7 +143,7 @@ class GameLevel():
                         player1_bullets_group.add(bullet)
                         
             # Player 1 uses ↑↓←→ to move, press 0 to shoot
-            if self.is_dual_mode and (tank_player2.num_lifes >= 0):
+            if self.is_dual_mode and (self.time_left >= 0):
                 if key_pressed[pygame.K_UP]:
                     player2_tanks_group.remove(tank_player2)
                     tank_player2.move('up', self.scene_elems, player2_tanks_group, enemy_tanks_group, home)
@@ -203,8 +201,7 @@ class GameLevel():
                         self.sounds['bang'].play()
                         if player2_tank is not None:
                             player2_tank.addPoint(1)
-                    if player1_tank.num_lifes < 0:
-                        pass
+
             # Player is killed by player
             for tank in enemy_tanks_group:
                 if pygame.sprite.spritecollide(tank, player1_bullets_group, True, None):
@@ -229,7 +226,6 @@ class GameLevel():
             if self.time_left <= 0:
                 is_running = False
                 home.setDead()
-            #
             if pygame.sprite.groupcollide(player1_tanks_group, self.scene_elems.get('tree_group'), False, False) or \
                 pygame.sprite.groupcollide(player2_tanks_group, self.scene_elems.get('tree_group'), False, False):
                 self.sounds['hit'].play()
@@ -276,12 +272,12 @@ class GameLevel():
             # --我方坦克吃到食物
             for player_tank in player1_tanks_group:
                 enemy_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player2_tanks_group)
-                # __doChallenge(player_tank, 'player1_level')
+                __doChallenge(player_tank, 'player1_level')
                         
             for player_tank in player2_tanks_group:
                 enemy_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player1_tanks_group)
-                # __doChallenge(player_tank, 'player2_level')
-                
+                __doChallenge(player_tank, 'player2_level')
+
             # 画场景地图
             for key, value in self.scene_elems.items():
                 if key in ['ice_group', 'river_group']:
@@ -330,9 +326,7 @@ class GameLevel():
                     foods_group.remove(food)
             foods_group.draw(screen)
             self.__showGamePanel(screen, tank_player1, tank_player2) if self.is_dual_mode else self.__showGamePanel(screen, tank_player1)
-            # 我方坦克都挂了
-            if tank_player1.num_lifes == 0 or tank_player2.num_lifes == 0:
-                is_running = False
+
             if tank_player1.points > tank_player2.points:
                 is_win = "Player 1"
             elif tank_player1.points < tank_player2.points:
@@ -376,12 +370,6 @@ class GameLevel():
         screen.blit(player1_point_tip, player1_point_tip_rect)
         
         top_idx += 1
-        player1_state_tip = self.font.render('Life: %s' % max(0, tank_player1.num_lifes), True, color_white)
-        player1_state_tip_rect = player1_state_tip.get_rect()
-        player1_state_tip_rect.left, player1_state_tip_rect.top = self.width+5, self.height*top_idx/30
-        screen.blit(player1_state_tip, player1_state_tip_rect)
-        
-        top_idx += 1
         player1_state_tip = self.font.render('Tank-Level: %s' % max(0, tank_player1.tanklevel), True, color_white)
         player1_state_tip_rect = player1_state_tip.get_rect()
         player1_state_tip_rect.left, player1_state_tip_rect.top = self.width+5, self.height*top_idx/30
@@ -405,12 +393,6 @@ class GameLevel():
         player2_point_tip_rect = player2_point_tip.get_rect()
         player2_point_tip_rect.left, player2_point_tip_rect.top = self.width+5, self.height*top_idx/30
         screen.blit(player2_point_tip, player2_point_tip_rect)
-        
-        top_idx += 1
-        player2_state_tip = self.font.render('Life: %s' % max(0, tank_player2.num_lifes), True, color_white) if tank_player2 else self.font.render('Life: None', True, color_white)
-        player2_state_tip_rect = player2_state_tip.get_rect()
-        player2_state_tip_rect.left, player2_state_tip_rect.top = self.width+5, self.height*top_idx/30
-        screen.blit(player2_state_tip, player2_state_tip_rect)
         
         top_idx += 1
         player2_state_tip = self.font.render('Tank-Level: %s' % max(0, tank_player2.tanklevel), True, color_white) if tank_player2 else self.font.render('TLevel: None', True, color_white)

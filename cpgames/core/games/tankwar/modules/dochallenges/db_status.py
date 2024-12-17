@@ -3,7 +3,7 @@ import pymongo
 import pymongo.errors
 from retry import retry
 
-from .....games.tankwar.modules.outsidechallenges import config
+from .....games.tankwar.modules.dochallenges import config
 
 
 class DBStatus:

@@ -17,10 +17,9 @@ def GameEndIterface(screen, cfg, resource_loader, winner=None):
     color_red = (255, 0, 0)
     font = resource_loader.fonts['end']
     # 游戏失败图
-    gameover_img = resource_loader.images['others']['gameover']
-    gameover_img = pygame.transform.scale(gameover_img, (150, 75))
-    gameover_img_rect = gameover_img.get_rect()
-    gameover_img_rect.midtop = cfg.SCREENSIZE[0] / 2, cfg.SCREENSIZE[1] / 8
+    gameover_render = font.render(f'End Game', True, color_red)
+    gameover_render_rect = gameover_render.get_rect()
+    gameover_render_rect.midtop = cfg.SCREENSIZE[0] / 2, cfg.SCREENSIZE[1] / 8
     gameover_flash_time = 25
     gameover_flash_count = 0
     gameover_show_flag = True
@@ -61,7 +60,7 @@ def GameEndIterface(screen, cfg, resource_loader, winner=None):
             gameover_show_flag = not gameover_show_flag
             gameover_flash_count = 0
         if gameover_show_flag:
-            screen.blit(gameover_img, gameover_img_rect)
+            screen.blit(gameover_render, gameover_render_rect)
         screen.blit(font_render, font_rect)
         if not is_quit_game:
             tank_rect.right, tank_rect.top = restart_rect.left-10, restart_rect.top

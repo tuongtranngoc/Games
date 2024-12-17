@@ -1,11 +1,14 @@
 from flask import Flask, render_template, jsonify
 from pymongo import MongoClient
 
+
+from .....games.tankwar.modules.dochallenges import config
+
 app = Flask(__name__)
 
-client = MongoClient('mongodb://localhost:27017/')
-db = client['kalapa-game']
-players_collection = db['levels']
+client = MongoClient(config.database["host"])
+db = client[config.database['db_name']]
+players_collection = db[config.database['level_collection']]
 
 if players_collection.count_documents({}) == 0:
     players_collection.insert_one({"player1_level": False, "player2_level": False})
