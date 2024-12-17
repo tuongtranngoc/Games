@@ -9,7 +9,7 @@ from .....games.tankwar.modules.dochallenges import config
 class DBStatus:
     def __init__(self):
         self.client_connection()
-        self.init_data = json.load(open('core/games/tankwar/modules/outsidechallenges/kalapa-game.level-improvement.json'))
+        self.init_data = json.load(open('core/games/tankwar/modules/doChallenges/kalapa-game.level-improvement.json'))
         self.update_status(self.init_data)
 
     @retry(pymongo.errors.ConfigurationError, tries=3, delay=5)

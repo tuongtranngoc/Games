@@ -10,7 +10,8 @@ import pygame
 import random
 from .sprites import *
 from ....utils import QuitGame
-from ....games.tankwar.modules.outsidechallenges.db_status import DBStatus
+from ....games.tankwar.modules.game_state import TankWarState
+from ....games.tankwar.modules.dochallenges.db_status import DBStatus
 
 
 class GameLevel():
@@ -45,6 +46,7 @@ class GameLevel():
         self.__parseLevelFile()
 
         self.status = DBStatus()
+        self.tankwar_state = TankWarState()
         
     '''Game Start'''
     def start(self, screen):
@@ -115,56 +117,40 @@ class GameLevel():
                                 enemy_tanks_group.add(enemy_tank)
             seconds_passed = (pygame.time.get_ticks() - start_ticks) // 1000
             self.time_left = max(0, self.countdown_time - seconds_passed)
-            
+
+            tankwar_state = self.tankwar_state.get_state(tank_player1,
+                                                       tank_player2,
+                                                       enemy_tanks_group,
+                                                       player1_bullets_group,
+                                                       player2_bullets_group,
+                                                       enemy_bullets_group,
+                                                       self.scene_elems,
+                                                       foods_group)
+            actions = self.tankwar_state.decide(tankwar_state)
             # Player actions
-            key_pressed = pygame.key.get_pressed()
             # Player 1 uses WSAD to move, press Space to shoot
             if self.time_left >= 0:
-                if key_pressed[pygame.K_w]:
-                    player1_tanks_group.remove(tank_player1)
-                    tank_player1.move('up', self.scene_elems, player1_tanks_group, enemy_tanks_group, home)
-                    player1_tanks_group.add(tank_player1)
-                elif key_pressed[pygame.K_s]:
-                    player1_tanks_group.remove(tank_player1)
-                    tank_player1.move('down', self.scene_elems, player1_tanks_group, enemy_tanks_group, home)
-                    player1_tanks_group.add(tank_player1)
-                elif key_pressed[pygame.K_a]:
-                    player1_tanks_group.remove(tank_player1)
-                    tank_player1.move('left', self.scene_elems, player1_tanks_group, enemy_tanks_group, home)
-                    player1_tanks_group.add(tank_player1)
-                elif key_pressed[pygame.K_d]:
-                    player1_tanks_group.remove(tank_player1)
-                    tank_player1.move('right', self.scene_elems, player1_tanks_group, enemy_tanks_group, home)
-                    player1_tanks_group.add(tank_player1)
-                elif key_pressed[pygame.K_SPACE]:
+                if actions['shoot']:
                     bullet = tank_player1.shoot()
                     if bullet:
                         self.sounds['fire'].play() if tank_player1.tanklevel < 2 else self.sounds['Gunfire'].play()
                         player1_bullets_group.add(bullet)
+                if actions['move']:
+                    player1_tanks_group.remove(tank_player1)
+                    tank_player1.move(actions['move'], self.scene_elems, player1_tanks_group, enemy_tanks_group, home)
+                    player1_tanks_group.add(tank_player1)
                         
             # Player 1 uses ↑↓←→ to move, press 0 to shoot
             if self.is_dual_mode and (self.time_left >= 0):
-                if key_pressed[pygame.K_UP]:
-                    player2_tanks_group.remove(tank_player2)
-                    tank_player2.move('up', self.scene_elems, player2_tanks_group, enemy_tanks_group, home)
-                    player2_tanks_group.add(tank_player2)
-                elif key_pressed[pygame.K_DOWN]:
-                    player2_tanks_group.remove(tank_player2)
-                    tank_player2.move('down', self.scene_elems, player2_tanks_group, enemy_tanks_group, home)
-                    player2_tanks_group.add(tank_player2)
-                elif key_pressed[pygame.K_LEFT]:
-                    player2_tanks_group.remove(tank_player2)
-                    tank_player2.move('left', self.scene_elems, player2_tanks_group, enemy_tanks_group, home)
-                    player2_tanks_group.add(tank_player2)
-                elif key_pressed[pygame.K_RIGHT]:
-                    player2_tanks_group.remove(tank_player2)
-                    tank_player2.move('right', self.scene_elems, player2_tanks_group, enemy_tanks_group, home)
-                    player2_tanks_group.add(tank_player2)
-                elif key_pressed[pygame.K_0]:
+                if actions['shoot']:
                     bullet = tank_player2.shoot()
                     if bullet:
-                        player2_bullets_group.add(bullet)
                         self.sounds['fire'].play() if tank_player2.tanklevel < 2 else self.sounds['Gunfire'].play()
+                        player2_bullets_group.add(bullet)
+                if actions['move']:
+                    player2_tanks_group.remove(tank_player2)
+                    tank_player2.move(actions['move'], self.scene_elems, player2_tanks_group, enemy_tanks_group, home)
+                    player2_tanks_group.add(tank_player2)
 
             pygame.sprite.groupcollide(player1_bullets_group, self.scene_elems.get('brick_group'), True, True)
             pygame.sprite.groupcollide(player2_bullets_group, self.scene_elems.get('brick_group'), True, True)
@@ -184,7 +170,7 @@ class GameLevel():
             pygame.sprite.groupcollide(player1_bullets_group, player2_bullets_group, True, True)
 
             # Player kill enemy
-            def __playerKillEnmy(enemy_tank, player_tank, point=1):
+            def __playerKillEnemy(enemy_tank, player_tank, point=1):
                 if enemy_tank.food:
                     foods_group.add(tank.food)
                     tank.food = None
@@ -205,9 +191,9 @@ class GameLevel():
             # Player is killed by player
             for tank in enemy_tanks_group:
                 if pygame.sprite.spritecollide(tank, player1_bullets_group, True, None):
-                    __playerKillEnmy(tank, tank_player1)
+                    __playerKillEnemy(tank, tank_player1)
                 if pygame.sprite.spritecollide(tank, player2_bullets_group, True, None):
-                    __playerKillEnmy(tank, tank_player2)
+                    __playerKillEnemy(tank, tank_player2)
             
             # Player-1 is killed by enemy
             for tank in player1_tanks_group:
@@ -225,7 +211,7 @@ class GameLevel():
                             
             if self.time_left <= 0:
                 is_running = False
-                home.setDead()
+                
             if pygame.sprite.groupcollide(player1_tanks_group, self.scene_elems.get('tree_group'), False, False) or \
                 pygame.sprite.groupcollide(player2_tanks_group, self.scene_elems.get('tree_group'), False, False):
                 self.sounds['hit'].play()
