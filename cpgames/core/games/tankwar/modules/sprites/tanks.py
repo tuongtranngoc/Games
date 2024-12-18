@@ -41,7 +41,6 @@ class PlayerTank(pygame.sprite.Sprite):
         self.booming_flag = False
         self.boom_count = 0
         # 坦克生命数量
-        self.num_lifes = 5
         # Points
         self.points = 0
         self.is_keep_still = False
@@ -190,16 +189,12 @@ class PlayerTank(pygame.sprite.Sprite):
             return False
         self.tanklevel -= 1
         if self.tanklevel < 0:
-            self.num_lifes -= 1
             self.booming_flag = True
         else:
             self.tank_image = self.player_tank_images[self.tanklevel].convert_alpha()
             self.setDirection(self.direction)
             self.image = self.tank_direction_image.subsurface((48*int(self.switch_pointer), 0), (48, 48))
         return True if self.tanklevel < 0 else False
-    
-    def addLife(self):
-        self.num_lifes += 1
 
     def addPoint(self, point):
         self.points += point

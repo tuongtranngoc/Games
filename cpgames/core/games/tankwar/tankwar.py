@@ -88,10 +88,8 @@ class Config():
             'boom': os.path.join(rootdir, 'resources/images/food/food_boom.png'),
             'clock': os.path.join(rootdir, 'resources/images/food/food_clock.png'),
             'gun': os.path.join(rootdir, 'resources/images/food/food_gun.png'),
-            'iron': os.path.join(rootdir, 'resources/images/food/food_iron.png'),
             'protect': os.path.join(rootdir, 'resources/images/food/food_protect.png'),
             'star': os.path.join(rootdir, 'resources/images/food/food_star.png'),
-            'tank': os.path.join(rootdir, 'resources/images/food/food_tank.png')
         },
         'home': [os.path.join(rootdir, 'resources/images/home/home1.png'), os.path.join(rootdir, 'resources/images/home/home_destroyed.png')],
         'scene': {

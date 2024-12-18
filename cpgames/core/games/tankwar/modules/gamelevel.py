@@ -10,8 +10,9 @@ import pygame
 import random
 from .sprites import *
 from ....utils import QuitGame
+from ....games.tankwar.modules.utils import get_state
 from ....games.tankwar.modules.game_state import TankWarState
-from ....games.tankwar.modules.dochallenges.db_status import DBStatus
+# from ....games.tankwar.modules.dochallenges.db_status import DBStatus
 
 
 class GameLevel():
@@ -45,7 +46,7 @@ class GameLevel():
         # 解析关卡文件
         self.__parseLevelFile()
 
-        self.status = DBStatus()
+        # self.status = DBStatus()
         self.tankwar_state = TankWarState()
         
     '''Game Start'''
@@ -80,7 +81,7 @@ class GameLevel():
                 protected_mask=resource_loader.images['others']['protect'], boom_image=resource_loader.images['others']['boom_static']
             )
             player2_tanks_group.add(tank_player2)
-        # 敌方坦克
+
         for position in self.enemy_tank_positions:
             enemy_tanks_group.add(EnemyTank(
                 enemy_tank_images=resource_loader.images['enemy'], appear_image=resource_loader.images['others']['appear'], position=position, 
@@ -95,6 +96,8 @@ class GameLevel():
         is_win = None
         is_running = True
         # 游戏主循环
+        pre_state_1 = {}
+        pre_state_2 = {}
         while is_running:
             screen.fill((0, 0, 0))
             screen.blit(background_img, (0, 0))
@@ -117,39 +120,42 @@ class GameLevel():
                                 enemy_tanks_group.add(enemy_tank)
             seconds_passed = (pygame.time.get_ticks() - start_ticks) // 1000
             self.time_left = max(0, self.countdown_time - seconds_passed)
-
-            tankwar_state = self.tankwar_state.get_state(tank_player1,
-                                                       tank_player2,
-                                                       enemy_tanks_group,
-                                                       player1_bullets_group,
-                                                       player2_bullets_group,
-                                                       enemy_bullets_group,
-                                                       self.scene_elems,
-                                                       foods_group)
-            actions = self.tankwar_state.decide(tankwar_state)
+            tankwar_state = get_state(tank_player1,
+                                        tank_player2,
+                                        enemy_tanks_group,
+                                        player1_bullets_group,
+                                        player2_bullets_group,
+                                        enemy_bullets_group,
+                                        self.scene_elems,
+                                        foods_group)
+            # import ipdb; ipdb.set_trace();
+            player1_action = self.tankwar_state.player1_action(pre_state_1, tankwar_state)
+            player2_action = self.tankwar_state.player2_action(pre_state_2, tankwar_state)
+            pre_state_1 = tankwar_state
+            pre_state_2 = tankwar_state
             # Player actions
             # Player 1 uses WSAD to move, press Space to shoot
             if self.time_left >= 0:
-                if actions['shoot']:
+                if player1_action['shoot']:
                     bullet = tank_player1.shoot()
                     if bullet:
                         self.sounds['fire'].play() if tank_player1.tanklevel < 2 else self.sounds['Gunfire'].play()
                         player1_bullets_group.add(bullet)
-                if actions['move']:
+                if player1_action['move']:
                     player1_tanks_group.remove(tank_player1)
-                    tank_player1.move(actions['move'], self.scene_elems, player1_tanks_group, enemy_tanks_group, home)
+                    tank_player1.move(player1_action['move'], self.scene_elems, player1_tanks_group, enemy_tanks_group, home)
                     player1_tanks_group.add(tank_player1)
                         
             # Player 1 uses ↑↓←→ to move, press 0 to shoot
             if self.is_dual_mode and (self.time_left >= 0):
-                if actions['shoot']:
+                if player2_action['shoot']:
                     bullet = tank_player2.shoot()
                     if bullet:
                         self.sounds['fire'].play() if tank_player2.tanklevel < 2 else self.sounds['Gunfire'].play()
                         player2_bullets_group.add(bullet)
-                if actions['move']:
+                if player2_action['move']:
                     player2_tanks_group.remove(tank_player2)
-                    tank_player2.move(actions['move'], self.scene_elems, player2_tanks_group, enemy_tanks_group, home)
+                    tank_player2.move(player2_action['move'], self.scene_elems, player2_tanks_group, enemy_tanks_group, home)
                     player2_tanks_group.add(tank_player2)
 
             pygame.sprite.groupcollide(player1_bullets_group, self.scene_elems.get('brick_group'), True, True)
@@ -243,11 +249,9 @@ class GameLevel():
                         elif food.name == 'star':
                             self.sounds['add'].play()
                             player_tank.improveTankLevel()
-                        elif food.name == 'tank':
-                            self.sounds['add'].play()
-                            player_tank.addLife()
+                            player_tank.setProtected()
                         foods_group.remove(food)
-                return enemy_tank_group
+                return enemy_tank_group, other_ptank_group
                         
             def __doChallenge(p_tank, player_level):
                 tank_levels = self.status.query_status()
@@ -257,12 +261,12 @@ class GameLevel():
 
             # --我方坦克吃到食物
             for player_tank in player1_tanks_group:
-                enemy_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player2_tanks_group)
-                __doChallenge(player_tank, 'player1_level')
+                enemy_tanks_group, player2_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player2_tanks_group)
+                # __doChallenge(player_tank, 'player1_level')
                         
             for player_tank in player2_tanks_group:
-                enemy_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player1_tanks_group)
-                __doChallenge(player_tank, 'player2_level')
+                enemy_tanks_group, player1_tanks_group = __playerEeatFood(player_tank, enemy_tanks_group, player1_tanks_group)
+                # __doChallenge(player_tank, 'player2_level')
 
             # 画场景地图
             for key, value in self.scene_elems.items():
@@ -300,6 +304,7 @@ class GameLevel():
                 if data_return.get('boomed'):
                     enemy_tanks_group.remove(tank)
             enemy_tanks_group.draw(screen)
+            
             # 画场景地图
             for key, value in self.scene_elems.items():
                 if key not in ['ice_group', 'river_group']:

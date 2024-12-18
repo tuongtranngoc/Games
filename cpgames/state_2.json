@@ -1,0 +1,2178 @@
+{
+    "tank_player1_state": {
+        "name": "player1",
+        "border_len": 3,
+        "screensize": [
+            630,
+            630
+        ],
+        "init_direction": "up",
+        "init_position": [
+            3,
+            579
+        ],
+        "protected_mask_flash_time": 25,
+        "protected_mask_flash_count": 0,
+        "protected_mask_pointer": false,
+        "boom_last_time": 5,
+        "booming_flag": false,
+        "boom_count": 0,
+        "points": 3,
+        "is_keep_still": false,
+        "keep_still_time": 250,
+        "keep_still_count": 0,
+        "direction": "up",
+        "move_cache_time": 4,
+        "move_cache_count": 1,
+        "is_protected": false,
+        "protected_time": 1500,
+        "protected_count": 0,
+        "speed": 8,
+        "bullet_cooling_time": 30,
+        "bullet_cooling_count": 28,
+        "is_bullet_cooling": true,
+        "tanklevel": 0,
+        "switch_count": 0,
+        "switch_time": 1,
+        "switch_pointer": false,
+        "rect": [
+            3,
+            571,
+            48,
+            48
+        ],
+        "group_id": "Group1_sprites"
+    },
+    "tank_player2_state": {
+        "name": "player2",
+        "border_len": 3,
+        "screensize": [
+            630,
+            630
+        ],
+        "init_direction": "up",
+        "init_position": [
+            579,
+            579
+        ],
+        "protected_mask_flash_time": 25,
+        "protected_mask_flash_count": 0,
+        "protected_mask_pointer": false,
+        "boom_last_time": 5,
+        "booming_flag": false,
+        "boom_count": 0,
+        "points": 3,
+        "is_keep_still": false,
+        "keep_still_time": 250,
+        "keep_still_count": 0,
+        "direction": "up",
+        "move_cache_time": 4,
+        "move_cache_count": 1,
+        "is_protected": false,
+        "protected_time": 1500,
+        "protected_count": 0,
+        "speed": 8,
+        "bullet_cooling_time": 30,
+        "bullet_cooling_count": 22,
+        "is_bullet_cooling": true,
+        "tanklevel": 0,
+        "switch_count": 0,
+        "switch_time": 1,
+        "switch_pointer": true,
+        "rect": [
+            579,
+            483,
+            48,
+            48
+        ],
+        "group_id": "Group1_sprites"
+    },
+    "enemy_tank_group_state": [
+        {
+            "border_len": 3,
+            "screensize": [
+                630,
+                630
+            ],
+            "tanktype": "4",
+            "tanklevel": 0,
+            "food": null,
+            "switch_count": 0,
+            "switch_time": 1,
+            "switch_pointer": false,
+            "move_cache_time": 4,
+            "move_cache_count": 3,
+            "direction": "down",
+            "rect": [
+                579,
+                267,
+                48,
+                48
+            ],
+            "boom_last_time": 5,
+            "boom_count": 0,
+            "booming_flag": false,
+            "bullet_cooling_time": 120,
+            "bullet_cooling_count": 12,
+            "is_bullet_cooling": true,
+            "is_borning": false,
+            "borning_left_time": -1,
+            "is_keep_still": false,
+            "keep_still_time": 500,
+            "keep_still_count": 0,
+            "speed": 2,
+            "group_id": "Group8_sprites"
+        },
+        {
+            "border_len": 3,
+            "screensize": [
+                630,
+                630
+            ],
+            "tanktype": "3",
+            "tanklevel": 3,
+            "switch_count": 1,
+            "switch_time": 1,
+            "switch_pointer": true,
+            "move_cache_time": 4,
+            "move_cache_count": 1,
+            "direction": "down",
+            "rect": [
+                579,
+                63,
+                48,
+                48
+            ],
+            "boom_last_time": 5,
+            "boom_count": 0,
+            "booming_flag": false,
+            "bullet_cooling_time": 90,
+            "bullet_cooling_count": 72,
+            "is_bullet_cooling": true,
+            "is_borning": false,
+            "borning_left_time": -1,
+            "is_keep_still": false,
+            "keep_still_time": 500,
+            "keep_still_count": 0,
+            "speed": 4,
+            "group_id": "Group8_sprites",
+            "food": {
+                "name": "clock",
+                "rect": [
+                    504,
+                    391,
+                    32,
+                    32
+                ],
+                "exist_time": 1000
+            }
+        },
+        {
+            "border_len": 3,
+            "screensize": [
+                630,
+                630
+            ],
+            "tanktype": "4",
+            "tanklevel": 1,
+            "food": null,
+            "switch_count": 1,
+            "switch_time": 1,
+            "switch_pointer": false,
+            "move_cache_time": 4,
+            "move_cache_count": 2,
+            "direction": "right",
+            "rect": [
+                497,
+                3,
+                48,
+                48
+            ],
+            "boom_last_time": 5,
+            "boom_count": 0,
+            "booming_flag": false,
+            "bullet_cooling_time": 110,
+            "bullet_cooling_count": 10,
+            "is_bullet_cooling": true,
+            "is_borning": false,
+            "borning_left_time": -1,
+            "is_keep_still": false,
+            "keep_still_time": 500,
+            "keep_still_count": 0,
+            "speed": 2,
+            "group_id": "Group8_sprites"
+        },
+        {
+            "border_len": 3,
+            "screensize": [
+                630,
+                630
+            ],
+            "tanktype": "4",
+            "tanklevel": 3,
+            "switch_count": 0,
+            "switch_time": 1,
+            "switch_pointer": false,
+            "move_cache_time": 4,
+            "move_cache_count": 1,
+            "direction": "left",
+            "rect": [
+                27,
+                507,
+                48,
+                48
+            ],
+            "boom_last_time": 5,
+            "boom_count": 0,
+            "booming_flag": false,
+            "bullet_cooling_time": 90,
+            "bullet_cooling_count": 8,
+            "is_bullet_cooling": true,
+            "is_borning": false,
+            "borning_left_time": -1,
+            "is_keep_still": false,
+            "keep_still_time": 500,
+            "keep_still_count": 0,
+            "speed": 2,
+            "group_id": "Group8_sprites",
+            "food": {
+                "name": "boom",
+                "rect": [
+                    218,
+                    258,
+                    32,
+                    32
+                ],
+                "exist_time": 1000
+            }
+        },
+        {
+            "border_len": 3,
+            "screensize": [
+                630,
+                630
+            ],
+            "tanktype": "2",
+            "tanklevel": 0,
+            "food": null,
+            "switch_count": 1,
+            "switch_time": 1,
+            "switch_pointer": false,
+            "move_cache_time": 4,
+            "move_cache_count": 1,
+            "direction": "up",
+            "rect": [
+                219,
+                381,
+                48,
+                48
+            ],
+            "boom_last_time": 5,
+            "boom_count": 0,
+            "booming_flag": false,
+            "bullet_cooling_time": 90,
+            "bullet_cooling_count": 8,
+            "is_bullet_cooling": true,
+            "is_borning": false,
+            "borning_left_time": -1,
+            "is_keep_still": false,
+            "keep_still_time": 500,
+            "keep_still_count": 0,
+            "speed": 6,
+            "group_id": "Group8_sprites"
+        },
+        {
+            "border_len": 3,
+            "screensize": [
+                630,
+                630
+            ],
+            "tanktype": "4",
+            "tanklevel": 1,
+            "food": null,
+            "switch_count": 0,
+            "switch_time": 1,
+            "switch_pointer": false,
+            "move_cache_time": 4,
+            "move_cache_count": 1,
+            "direction": "up",
+            "rect": [
+                219,
+                475,
+                48,
+                48
+            ],
+            "boom_last_time": 5,
+            "boom_count": 0,
+            "booming_flag": false,
+            "bullet_cooling_time": 110,
+            "bullet_cooling_count": 36,
+            "is_bullet_cooling": true,
+            "is_borning": false,
+            "borning_left_time": -1,
+            "is_keep_still": false,
+            "keep_still_time": 500,
+            "keep_still_count": 0,
+            "speed": 2,
+            "group_id": "Group8_sprites"
+        },
+        {
+            "border_len": 3,
+            "screensize": [
+                630,
+                630
+            ],
+            "tanktype": "2",
+            "tanklevel": 3,
+            "switch_count": 1,
+            "switch_time": 1,
+            "switch_pointer": true,
+            "move_cache_time": 4,
+            "move_cache_count": 2,
+            "direction": "down",
+            "rect": [
+                3,
+                105,
+                48,
+                48
+            ],
+            "boom_last_time": 5,
+            "boom_count": 0,
+            "booming_flag": false,
+            "bullet_cooling_time": 90,
+            "bullet_cooling_count": 86,
+            "is_bullet_cooling": true,
+            "is_borning": false,
+            "borning_left_time": -1,
+            "is_keep_still": false,
+            "keep_still_time": 500,
+            "keep_still_count": 0,
+            "speed": 6,
+            "group_id": "Group8_sprites",
+            "food": {
+                "name": "star",
+                "rect": [
+                    366,
+                    281,
+                    32,
+                    32
+                ],
+                "exist_time": 1000
+            }
+        },
+        {
+            "border_len": 3,
+            "screensize": [
+                630,
+                630
+            ],
+            "tanktype": "3",
+            "tanklevel": 1,
+            "food": null,
+            "switch_count": 0,
+            "switch_time": 1,
+            "switch_pointer": false,
+            "move_cache_time": 4,
+            "move_cache_count": 1,
+            "direction": "right",
+            "rect": [
+                115,
+                3,
+                48,
+                48
+            ],
+            "boom_last_time": 5,
+            "boom_count": 0,
+            "booming_flag": false,
+            "bullet_cooling_time": 110,
+            "bullet_cooling_count": 36,
+            "is_bullet_cooling": true,
+            "is_borning": false,
+            "borning_left_time": -1,
+            "is_keep_still": false,
+            "keep_still_time": 500,
+            "keep_still_count": 0,
+            "speed": 4,
+            "group_id": "Group8_sprites"
+        }
+    ],
+    "player1_bullets_group_state": [],
+    "player2_bullets_group_state": [],
+    "enemy_bullets_group_state": [
+        {
+            "width": 630,
+            "height": 630,
+            "direction": "right",
+            "position": [
+                58,
+                27
+            ],
+            "rect": [
+                482,
+                21,
+                12,
+                12
+            ],
+            "border_len": 3,
+            "is_stronger": false,
+            "speed": 10,
+            "group_id": "Group5_sprites"
+        },
+        {
+            "width": 630,
+            "height": 630,
+            "direction": "up",
+            "position": [
+                243,
+                492
+            ],
+            "rect": [
+                237,
+                306,
+                12,
+                12
+            ],
+            "border_len": 3,
+            "is_stronger": false,
+            "speed": 10,
+            "group_id": "Group5_sprites"
+        },
+        {
+            "width": 630,
+            "height": 630,
+            "direction": "right",
+            "position": [
+                128,
+                27
+            ],
+            "rect": [
+                302,
+                21,
+                12,
+                12
+            ],
+            "border_len": 3,
+            "is_stronger": false,
+            "speed": 10,
+            "group_id": "Group5_sprites"
+        },
+        {
+            "width": 630,
+            "height": 630,
+            "direction": "right",
+            "position": [
+                542,
+                27
+            ],
+            "rect": [
+                586,
+                21,
+                12,
+                12
+            ],
+            "border_len": 3,
+            "is_stronger": false,
+            "speed": 10,
+            "group_id": "Group5_sprites"
+        },
+        {
+            "width": 630,
+            "height": 630,
+            "direction": "up",
+            "position": [
+                243,
+                392
+            ],
+            "rect": [
+                237,
+                354,
+                12,
+                12
+            ],
+            "border_len": 3,
+            "is_stronger": false,
+            "speed": 8,
+            "group_id": "Group5_sprites"
+        }
+    ],
+    "sences_group_state": {
+        "brick_group": [
+            {
+                "rect": [
+                    51,
+                    51,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    75,
+                    51,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    51,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    51,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    51,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    51,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    51,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    51,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    51,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    51,
+                    75,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    75,
+                    75,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    75,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    75,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    75,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    75,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    75,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    75,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    75,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    51,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    75,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    243,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    99,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    51,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    75,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    243,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    123,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    51,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    75,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    243,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    51,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    75,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    243,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    51,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    75,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    243,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    195,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    363,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    363,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    363,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    387,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    291,
+                    387,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    315,
+                    387,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    387,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    387,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    411,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    411,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    411,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    291,
+                    411,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    315,
+                    411,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    411,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    411,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    411,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    411,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    435,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    435,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    435,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    435,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    435,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    435,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    435,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    435,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    435,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    459,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    459,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    459,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    459,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    459,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    459,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    459,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    459,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    483,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    483,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    483,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    483,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    483,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    483,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    483,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    483,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    507,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    507,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    507,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    507,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    507,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    507,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    531,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    531,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    531,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    531,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    531,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    531,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    51,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    75,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    531,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            },
+            {
+                "rect": [
+                    555,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group140_sprites"
+            }
+        ],
+        "iron_group": [
+            {
+                "rect": [
+                    291,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    315,
+                    147,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    291,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    315,
+                    171,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    3,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    27,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    579,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    603,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    291,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    315,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    555,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    579,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    579,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    603,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    603,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            }
+        ],
+        "ice_group": [],
+        "river_group": [
+            {
+                "rect": [
+                    243,
+                    267,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    267,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    291,
+                    267,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    315,
+                    267,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    267,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    267,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    243,
+                    291,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    267,
+                    291,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    291,
+                    291,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    315,
+                    291,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    339,
+                    291,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            },
+            {
+                "rect": [
+                    363,
+                    291,
+                    24,
+                    24
+                ],
+                "group_id": "Group12_sprites"
+            }
+        ],
+        "tree_group": [
+            {
+                "rect": [
+                    99,
+                    315,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    123,
+                    315,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    315,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    315,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    315,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    315,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    483,
+                    315,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    507,
+                    315,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    99,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    123,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    147,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    171,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    435,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    459,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    483,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            },
+            {
+                "rect": [
+                    507,
+                    339,
+                    24,
+                    24
+                ],
+                "group_id": "Group16_sprites"
+            }
+        ]
+    },
+    "foods_group_state": [
+        {
+            "name": "gun",
+            "rect": [
+                454,
+                529,
+                32,
+                32
+            ],
+            "exist_time": -1,
+            "group_id": "Group1_sprites"
+        }
+    ]
+}
